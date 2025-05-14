@@ -15,10 +15,11 @@ const msg1 = async () => {
   //Async Arrow Function
   try {
     const msg = await axios.get("http://localhost:8080/api/customers/2");
-    return msg;
+    const test = document.querySelector("#test");
+    test!.innerHTML = msg.data.name;
   } catch (err) {
     console.log("error occured! " + err);
   }
 };
 
-console.log(await msg1());
+await msg1();
