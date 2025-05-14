@@ -31,7 +31,7 @@ const carGenerator = (car: Car) => {
           <p class="car__info car__info--make">${car.make} ${car.model}</p>
           <p class="car__info car__info--year">${car.year}</p>
           <p class="Car.">£${car.dailyRate}</p>
-          <p class="car__info car__info--availability">${car.availability}</p>
+          <p class="car__info car__info--availability">${car.availability? 'Available' : 'Booked'}</p>
         </div>
         <button class="car__prefill">Prefill</button>
       </div> `;
