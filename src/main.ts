@@ -1,25 +1,65 @@
 import "./style.scss";
+import type { Car } from "./car";
 
 import axios from "axios";
 
-// axios
-//   .get("http://localhost:8080/api/customers/2")
-//   .then((response) => {
-//     console.log("GET posts:", response.data);
-//   })
-//   .catch((error) => {
-//     console.error("GET error:", error);
-//   });
-
-const msg1 = async () => {
+const carInventory = document.querySelector(".car-inventory");
+if (!carInventory) {
+  throw new Error("CarInvetory Does Not Exist!");
+}
+const cars = async (): Promise<Car[]> => {
   //Async Arrow Function
-  try {
-    const msg = await axios.get("http://localhost:8080/api/customers/2");
-    const test = document.querySelector("#test");
-    test!.innerHTML = msg.data.name;
-  } catch (err) {
-    console.log("error occured! " + err);
-  }
+  const response = await axios.get("http://localhost:8080/api/cars");
+  return response.data;
 };
 
-await msg1();
+const populateCars = async () => {
+  const carsList = await cars();
+  carsList.forEach((element) => {
+    carGenerator(element);
+  });
+};
+
+const carGenerator = (car: Car) => {
+  const card = document.createElement("div");
+  carInventory.appendChild(card);
+  card.classList.add("car");
+  card.id = car.id.toString();
+  const carImage = document.createElement("div");
+  carImage.classList.add("car__image");
+  const image = document.createElement("img");
+  image.setAttribute("src", "https://placehold.co/300x200");
+  carImage.appendChild(image);
+  card.appendChild(carImage);
+  const test = document.createElement("p");
+  test.innerHTML = car.model;
+  card.appendChild(test);
+
+  //     card.innerHTML = `<p>Name:${char.name}</p>
+  //                 <img src="${char.image}" alt="Image of ${char.name}">
+  //                 <p>Origin:${char.origin.name}</p>
+  //                 <p>Appears in ${char.occurences} episodes</p>`;
+  //     return card;
+};
+
+await populateCars();
+
+// const characters = await getCharacters(randomArrGenerator(MAX_CHAR, 5));
+// const charList = document.querySelector<HTMLDivElement>('#charList');
+
+// const charCardGenerator = (char: Character) => {
+//     const card = document.createElement(ElementType.CARD);
+//     card.classList.add('charCard');
+//     card.innerHTML = `<p>Name:${char.name}</p>
+//                 <img src="${char.image}" alt="Image of ${char.name}">
+//                 <p>Origin:${char.origin.name}</p>
+//                 <p>Appears in ${char.occurences} episodes</p>`;
+//     return card;
+// };
+
+// enum ElementType {
+//   CARD = 'div',
+//   TEXT = 'p',
+//   IMAGE = 'img',
+//   SECTION = 'section',
+// }
