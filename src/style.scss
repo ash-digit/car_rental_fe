@@ -20,7 +20,7 @@ body {
   align-items: center;
 }
 
-main {
+.container {
   border: solid orange 1px;
   display: flex;
   flex-direction: column;
@@ -58,7 +58,7 @@ h1 {
   max-height: 500px;
   overflow: hidden;
   overflow-y: scroll;
-  margin-top: 5px;
+  margin-top: 50px;
 }
 
 .car {
@@ -69,9 +69,17 @@ h1 {
   align-items: center;
   max-width: 330px;
 
-  &__image {
+  &__image-container {
     border: solid red 1px;
     height: auto;
+  }
+
+  &__image {
+    border: solid red 1px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    overflow: hidden;
   }
 
   &__info {
@@ -79,8 +87,14 @@ h1 {
     padding: 0;
 
     border: solid orange 1px;
-    // display: flex;
-    // flex-direction: column;
+    text-align: center;
+    min-width: 40%;
+    padding-right: 10px;
+
+    &--make {
+      text-wrap: balance;
+      max-width: 50px;
+    }
   }
 }
 
@@ -93,5 +107,6 @@ div {
 }
 
 p {
-  font-size: small;
+  font-size: medium;
+  text-wrap: balance;
 }

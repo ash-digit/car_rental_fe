@@ -23,17 +23,16 @@ const carGenerator = (car: Car) => {
   const card = document.createElement("div");
 
   const innerContent = `<div class="car" id="${car.id}">
-        <div class="car__image">
-          <img src="https://placehold.co/200x150" alt="placeholder" />
+        <div class="car__image-container">
+          <img class="car__image" src="https://placehold.co/200x150/png" alt="placeholder" />
         </div>
-        <div class="car__info">
+        <div class="car__info-container">
           <p class="car__info car__info--make">${car.make} ${car.model}</p>
           <p class="car__info car__info--year">${car.year}</p>
-          <p class="Car.">£${car.dailyRate}</p>
+          <p class="car__info car__info--price">£${car.dailyRate}</p>
           <p class="car__info car__info--availability">${
             car.availability ? "Available" : "Booked"
           }</p>
-          <button class="car__prefill">Prefill</button>
         </div>
       </div> `;
   card.innerHTML = innerContent;
