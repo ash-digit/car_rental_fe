@@ -1,5 +1,6 @@
 import "./style.scss";
 import type { Car } from "./Car";
+import type { Booking } from "./Booking";
 
 import axios from "axios";
 
@@ -30,7 +31,9 @@ const carGenerator = (car: Car) => {
           <p class="car__info car__info--make">${car.make} ${car.model}</p>
           <p class="car__info car__info--year">${car.year}</p>
           <p class="Car.">£${car.dailyRate}</p>
-          <p class="car__info car__info--availability">${car.availability? 'Available' : 'Booked'}</p>
+          <p class="car__info car__info--availability">${
+            car.availability ? "Available" : "Booked"
+          }</p>
         </div>
         <button class="car__prefill">Prefill</button>
       </div> `;
@@ -105,3 +108,55 @@ await populateCars();
 //   IMAGE = 'img',
 //   SECTION = 'section',
 // }
+
+const bookingTable = document.querySelector("#bookings__table");
+
+if (!bookingTable) {
+  throw new Error("Bookings Does Not Exist!");
+}
+const bookings = async (): Promise<Booking[]> => {
+  const response = await axios.get("http://localhost:8080/api/bookings");
+  return response.data;
+};
+
+const populateBookings = async () => {
+  const bookingList = await bookings();
+  bookingList.forEach((element) => {
+    bookingGenerator(element);
+  });
+};
+
+const bookingGenerator = (booking: Booking) => {
+  if (booking.bookingStatus) {
+    const tableRow = document.createElement("tr");
+
+    const innerContent = `
+            <td>${booking.customer.name}</td>
+            <td>${booking.startDate}</td>
+            <td>${booking.endDate}</td>
+            <td>${booking.car.make} ${booking.car.model}</td>
+            <td>${booking.totalPrice}</td>
+            <td><button id=${booking.id}>X</button></td>
+          `;
+    tableRow.innerHTML = innerContent;
+    bookingTable.appendChild(tableRow);
+  }
+};
+populateBookings();
+
+const allBtns = document.querySelectorAll("button");
+
+const patchBooking = async (e: Event) => {
+  if (!e.target) {
+    return;
+  }
+  const id = (e.target as Element).id;
+  try {
+    await axios.patch(`http://localhost:8080/api/bookings/${id}`);
+    window.location.reload();
+  } catch (err: any) {
+    console.log("patching didn't take place!");
+  }
+};
+
+bookingTable.addEventListener("click", patchBooking);
