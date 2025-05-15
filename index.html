@@ -10,7 +10,25 @@
     <section class="form">
       <h1>Car Rental Front End</h1>
       <button>View All Cars</button>
-      <form></form>
+      <form id="form">
+        <div>
+          <label for="customerId">Customer ID:</label>
+          <input type="number" name="customerId" id="customerId" />
+        </div>
+        <div>
+          <label for="carId">Car ID:</label>
+          <input type="number" name="carId" id="carId" />
+        </div>
+        <div>
+          <label for="startDate">Start Date:</label>
+          <input type="date" name="startDate" id="startDate" />
+        </div>
+        <div>
+          <label for="endDate">End Date:</label>
+          <input type="date" name="endDate" id="endDate" />
+        </div>
+        <input type="submit" />
+      </form>
     </section>
     <section class="car-inventory">
       <!-- <div class="car" id="1">
@@ -27,5 +45,8 @@
       </div> -->
     </section>
     <script type="module" src="/src/main.ts"></script>
+    <!-- <script>
+      
+    </script> -->
   </body>
 </html>

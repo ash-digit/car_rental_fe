@@ -1,5 +1,5 @@
 import "./style.scss";
-import type { Car } from "./car";
+import type { Car } from "./Car";
 
 import axios from "axios";
 
@@ -8,7 +8,6 @@ if (!carInventory) {
   throw new Error("CarInvetory Does Not Exist!");
 }
 const cars = async (): Promise<Car[]> => {
-  //Async Arrow Function
   const response = await axios.get("http://localhost:8080/api/cars");
   return response.data;
 };
@@ -58,6 +57,32 @@ const carGenerator = (car: Car) => {
   //                 <p>Appears in ${char.occurences} episodes</p>`;
   //     return card;
 };
+
+const form = document.querySelector<HTMLFormElement>("#form");
+// const output = document.querySelector<HTMLParagraphElement>("#output");
+
+if (!form) {
+  throw new Error("form not working");
+}
+
+form.addEventListener("submit", async function (event) {
+  event.preventDefault();
+
+  const formData = new FormData(form);
+
+  const response = await fetch("http://localhost:8080/api/bookings", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: formData,
+  });
+
+  const result = await response.json();
+
+  return result;
+  // for (const [key, value] of formData.entries()) {
+  //   console.log(value, typeof value);
+  // }
+});
 
 await populateCars();
 
