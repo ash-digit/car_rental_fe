@@ -12,12 +12,19 @@
       <button>View All Cars</button>
       <form id="form">
         <div>
-          <label for="customerId">Customer ID:</label>
-          <input type="number" name="customerId" id="customerId" />
+          <label for="cars">Choose a customer:</label>
+
+          <select id="customersSelect" name="customerId">
+            <option value="">--Please choose an option--</option>
+          </select>
         </div>
+
         <div>
-          <label for="carId">Car ID:</label>
-          <input type="number" name="carId" id="carId" />
+          <label for="cars">Choose a car:</label>
+
+          <select id="carsSelect" name="carId">
+            <option value="">--Please choose an option--</option>
+          </select>
         </div>
         <div>
           <label for="startDate">Start Date:</label>
@@ -27,7 +34,7 @@
           <label for="endDate">End Date:</label>
           <input type="date" name="endDate" id="endDate" />
         </div>
-        <input type="submit" />
+        <button id="formButton">BOOK</button>
       </form>
     </section>
     <section class="car-inventory">
@@ -45,6 +52,7 @@
       </div> -->
     </section>
     <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/form.ts"></script>
     <!-- <script>
       
     </script> -->
