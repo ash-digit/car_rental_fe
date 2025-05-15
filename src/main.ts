@@ -1,23 +1,31 @@
 import "./style.scss";
-import type { Car } from "./Car";
 import type { Booking } from "./Booking";
+import type { Car } from "./Car";
 
-import axios from "axios";
+import { getAllBookings, getAllCars, patchBooking } from "./apiCalls";
 
-const carInventory = document.querySelector(".car-inventory");
+const carInventory = document.querySelector<HTMLElement>(".car-inventory");
+const bookingTable =
+  document.querySelector<HTMLTableElement>("#bookings__table");
+
 if (!carInventory) {
   throw new Error("CarInvetory Does Not Exist!");
 }
-const cars = async (): Promise<Car[]> => {
-  const response = await axios.get("http://localhost:8080/api/cars");
-  return response.data;
-};
+
+if (!bookingTable) {
+  throw new Error("Bookings Does Not Exist!");
+}
 
 const populateCars = async () => {
-  const carsList = await cars();
-  carsList.forEach((element) => {
-    carGenerator(element);
-  });
+  try {
+    const carsList = await getAllCars();
+
+    carsList.forEach((element) => {
+      carGenerator(element);
+    });
+  } catch (error) {
+    throw new Error(`There was an error getting the cars: ${error}`);
+  }
 };
 
 const carGenerator = (car: Car) => {
@@ -40,49 +48,15 @@ const carGenerator = (car: Car) => {
   carInventory.appendChild(card);
 };
 
-const form = document.querySelector<HTMLFormElement>("#form");
-
-
-if (!form) {
-  throw new Error("form not working");
-}
-
-form.addEventListener("submit", async function (event) {
-  event.preventDefault();
-
-  const formData = new FormData(form);
-
-  const response = await fetch("http://localhost:8080/api/bookings", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: formData,
-  });
-
-  const result = await response.json();
-
-  return result;
-
-});
-
-await populateCars();
-
-
-
-const bookingTable = document.querySelector("#bookings__table");
-
-if (!bookingTable) {
-  throw new Error("Bookings Does Not Exist!");
-}
-const bookings = async (): Promise<Booking[]> => {
-  const response = await axios.get("http://localhost:8080/api/bookings");
-  return response.data;
-};
-
 const populateBookings = async () => {
-  const bookingList = await bookings();
-  bookingList.forEach((element) => {
-    bookingGenerator(element);
-  });
+  try {
+    const bookingList = await getAllBookings();
+    bookingList.forEach((element) => {
+      bookingGenerator(element);
+    });
+  } catch (error) {
+    throw new Error(`There was an error getting the bookings: ${error}`);
+  }
 };
 
 const bookingGenerator = (booking: Booking) => {
@@ -101,21 +75,22 @@ const bookingGenerator = (booking: Booking) => {
     bookingTable.appendChild(tableRow);
   }
 };
-populateBookings();
 
-const allBtns = document.querySelectorAll("button");
-
-const patchBooking = async (e: Event) => {
+const handleBookingClick = async (e: Event) => {
   if (!e.target) {
     return;
   }
   const id = (e.target as Element).id;
+
   try {
-    await axios.patch(`http://localhost:8080/api/bookings/${id}`);
+    await patchBooking(id);
     window.location.reload();
-  } catch (err: any) {
-    console.log("patching didn't take place!");
+  } catch (error) {
+    throw new Error(`There was a problem patching the booking: ${error}`);
   }
 };
 
-bookingTable.addEventListener("click", patchBooking);
+populateCars();
+populateBookings();
+
+bookingTable.addEventListener("click", handleBookingClick);
