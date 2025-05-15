@@ -7,50 +7,40 @@
     <title>Car Rental Front End</title>
   </head>
   <body>
-    <section class="form">
-      <h1>Car Rental Front End</h1>
-      <button>View All Cars</button>
-      <form id="form">
-        <div>
-          <label for="cars">Choose a customer:</label>
+    <main class="container">
+      <section class="form">
+        <h1>Car Rental Front End</h1>
+        <button>View All Cars</button>
+        <form id="form">
+          <div>
+            <label for="cars">Choose a customer:</label>
 
-          <select id="customersSelect" name="customerId">
-            <option value="">--Please choose an option--</option>
-          </select>
-        </div>
+            <select id="customersSelect" name="customerId">
+              <option value="">--Please choose an option--</option>
+            </select>
+          </div>
 
-        <div>
-          <label for="cars">Choose a car:</label>
+          <div>
+            <label for="cars">Choose a car:</label>
 
-          <select id="carsSelect" name="carId">
-            <option value="">--Please choose an option--</option>
-          </select>
-        </div>
-        <div>
-          <label for="startDate">Start Date:</label>
-          <input type="date" name="startDate" id="startDate" />
-        </div>
-        <div>
-          <label for="endDate">End Date:</label>
-          <input type="date" name="endDate" id="endDate" />
-        </div>
-        <button id="formButton">BOOK</button>
-      </form>
-    </section>
-    <section class="car-inventory">
-      <!-- <div class="car" id="1">
-        <div class="car__image">
-          <img src="https://placehold.co/300x200" alt="placeholder" />
-        </div>
-        <div class="car__info">
-          <p class="car__info car__info--make">Make</p>
-          <p class="car__info car__info--year">Year</p>
-          <p class="Car.">Price</p>
-          <p class="car__info car__info--availability">Availability</p>
-        </div>
-        <button class="car__prefill">Prefill</button>
-      </div> -->
-    </section>
+            <select id="carsSelect" name="carId">
+              <option value="">--Please choose an option--</option>
+            </select>
+          </div>
+          <div>
+            <label for="startDate">Start Date:</label>
+            <input type="date" name="startDate" id="startDate" />
+          </div>
+          <div>
+            <label for="endDate">End Date:</label>
+            <input type="date" name="endDate" id="endDate" />
+          </div>
+          <button id="formButton">BOOK</button>
+        </form>
+      </section>
+      <section class="car-inventory">
+      </section>
+         </section>
     <section class="bookings">
       <table id="bookings__table">
         <tr>
@@ -63,10 +53,10 @@
         </tr>
       </table>
     </section>
+    </main>
+
     <script type="module" src="/src/main.ts"></script>
     <script type="module" src="/src/form.ts"></script>
-    <!-- <script>
-      
-    </script> -->
+
   </body>
 </html>
