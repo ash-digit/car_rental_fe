@@ -13,12 +13,12 @@ body {
 }
 
 .container {
-  border: solid red 1px;
+  // border: solid red 1px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 360px;
+  max-width: 600px;
   max-height: 100vh;
   overflow: hidden;
 }
@@ -28,7 +28,7 @@ h1 {
 }
 
 .form {
-  border: solid blue 1px;
+  // border: solid blue 1px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,14 +45,15 @@ h1 {
 
 
 .car-inventory {
-border: solid green 1px;
+display: none;
+// border: solid green 1px;
   overflow: hidden;
   overflow-y: scroll;
   margin-top: 20px;
 }
 
 .car {
-  border: solid yellow 1px;
+  // border: solid white 1px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -60,12 +61,12 @@ border: solid green 1px;
   max-width: 330px;
 
   &__image-container {
-    border: solid red 1px;
+    // border: solid red 1px;
     height: auto;
   }
 
   &__image {
-    border: solid red 1px;
+    // border: solid red 1px;
     width: 100%;
     height: auto;
     object-fit: contain;
@@ -76,7 +77,7 @@ border: solid green 1px;
     margin: 0;
     padding: 0;
 
-    border: solid orange 1px;
+    // border: solid orange 1px;
     text-align: center;
     min-width: 40%;
     padding-right: 10px;
@@ -102,7 +103,6 @@ p {
 }
 
 #bookings__table {
-  font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
@@ -126,6 +126,22 @@ p {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #04aa6d;
+  background-color: yellow;
   color: rgb(0, 0, 0);
+}
+
+
+// Take it away later
+.bookings{
+  display: none;
+}
+
+#bookings__table {
+    margin:0;
+    padding:0;
+    background:white;
+    border:none;
+    border-collapse:collapse;
+    border-spacing:0;
+    background-image:none;
 }
