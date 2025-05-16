@@ -33,7 +33,7 @@ const carGenerator = (car: Car) => {
 
   const innerContent = `<div class="car" id="${car.id}">
         <div class="car__image-container">
-          <img class="car__image" src="https://placehold.co/200x150/png" alt="placeholder" />
+          <img class="car__image" src=${car.imageUrl} alt="image of a car" />
         </div>
         <div class="car__info-container">
           <p class="car__info car__info--make">${car.make} ${car.model}</p>
