@@ -5,4 +5,5 @@ export type Car = {
   year: number;
   availability: boolean;
   dailyRate: number;
+  imageUrl: string;
 };
